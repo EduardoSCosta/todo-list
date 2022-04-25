@@ -1,0 +1,24 @@
+.task {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 20px;
+  background-color: #272733;
+  width: 600px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.task__title-wrapper {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.task__title {
+  margin-left: 10px;
+}
+
+.task__description {
+  padding-bottom: 10px;
+}
