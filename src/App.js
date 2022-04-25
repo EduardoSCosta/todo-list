@@ -1,6 +1,15 @@
+import Header from './components/Header';
+import TaskList from './components/TaskList';
+import { TaskListProvider } from './contexts/Tasks';
+import './styles/components/_button.css';
+import './styles/components/_input.css';
+
 function App() {
   return (
-    <h1>App</h1>
+    <TaskListProvider>
+      <Header />
+      <TaskList />
+    </TaskListProvider>
   );
 }
 
