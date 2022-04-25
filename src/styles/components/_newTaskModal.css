@@ -1,0 +1,24 @@
+.modal {
+  width: 500px;
+  height: 500px;
+  background-color: #21212b;
+  color: #f8f8f8;
+  margin: auto;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1d1d2491;
+}

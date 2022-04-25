@@ -1,0 +1,33 @@
+.button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 16px;
+  margin-right: 10px;
+}
+
+.button--new-task {
+  background-color: #ab6ddd;
+  color: #f8f8f8;
+}
+
+.button--selected {
+  filter: brightness(0.8);
+}
+
+.button--submit {
+  width: 400px;
+  margin-bottom: 10px;
+  background-color: #ab6ddd;
+  color: #f8f8f8;
+}
+
+.button--submit:disabled {
+  filter: brightness(0.7);
+}
+
+.button-close {
+  margin: auto;
+  background-color: transparent;
+  color: #f8f8f8;
+}
