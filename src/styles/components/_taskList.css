@@ -1,0 +1,10 @@
+.task-list {
+  margin-top: 20px;
+  padding-left: 20px;
+  color: #f8f8f8;
+}
+
+.task-list__empty {
+  margin-top: 20px;
+  color: #ab6ddd;
+}
