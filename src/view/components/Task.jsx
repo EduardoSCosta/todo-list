@@ -1,5 +1,5 @@
-import { useTaskList } from '../contexts/Tasks';
-import { TASK_STATUS } from '../constants/taskStatus';
+import { useTaskList } from '../hooks/useTaskList';
+import { TASK_STATUS } from '../../constants/taskStatus';
 import '../styles/components/_task.css';
 
 const Task = ({ task }) => {

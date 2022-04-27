@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import { useTaskList } from '../contexts/Tasks';
+import { useTaskList } from '../hooks/useTaskList';
 import '../styles/components/_newTaskModal.css';
 
 const NewTaskModal = ({ isOpen, setIsOpen }) => {
