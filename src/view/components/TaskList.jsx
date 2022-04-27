@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useTaskList } from '../contexts/Tasks';
-import { TASK_STATUS } from '../constants/taskStatus';
+import { useTaskList } from '../hooks/useTaskList';
+import { TASK_STATUS } from '../../constants/taskStatus';
 import Task from './Task';
 import '../styles/components/_taskList.css';
 
