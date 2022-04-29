@@ -1,15 +1,16 @@
+import { Provider } from 'react-redux';
+import store from './store/store';
 import Header from './view/components/Header';
 import TaskList from './view/components/TaskList';
-import { TaskListProvider } from './store/contexts/Tasks';
 import './view/styles/components/_button.css';
 import './view/styles/components/_input.css';
 
 function App() {
   return (
-    <TaskListProvider>
+    <Provider store={store}>
       <Header />
       <TaskList />
-    </TaskListProvider>
+    </Provider>
   );
 }
 
