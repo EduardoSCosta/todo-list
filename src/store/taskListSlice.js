@@ -1,10 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import { TASK_STATUS } from '../constants/taskStatus';
 import { getCreationDate } from '../utils/getCreationDate';
 
-const initialState = [];
+const fetchTasks = createAsyncThunk(); //dispatch(loading) -> dispatch(success) -> dispatch(error)
+const addTask = createAsyncThunk(); //dispatch(loading) -> dispatch(success) -> dispatch(error)
+const toggleTask = createAsyncThunk(); //dispatch(loading) -> dispatch(success) -> dispatch(error)
 
+const initialState = {
+  tasks: [],
+  status: "error"
+};
+fetchTasks.pending
 export const taskListSlice = createSlice({
   name: 'taskList',
   initialState,
