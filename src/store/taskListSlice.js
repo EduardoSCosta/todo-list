@@ -1,37 +1,59 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
-import { TASK_STATUS } from '../constants/taskStatus';
-import { getCreationDate } from '../utils/getCreationDate';
+import { createSlice } from '@reduxjs/toolkit';
+import { addNewTask, fetchTasks, toggleStatus } from '../services/taskListService';
 
-const fetchTasks = createAsyncThunk(); //dispatch(loading) -> dispatch(success) -> dispatch(error)
-const addTask = createAsyncThunk(); //dispatch(loading) -> dispatch(success) -> dispatch(error)
-const toggleTask = createAsyncThunk(); //dispatch(loading) -> dispatch(success) -> dispatch(error)
+const fetchTasksReducers = {
+  [fetchTasks.pending]: (currentState) => {
+    currentState.status = 'loading';
+  },
+  [fetchTasks.fulfilled]: (currentState, action) => {
+    currentState.status = 'success';
+    currentState.tasks = action.payload;
+  },
+  [fetchTasks.rejected]: (currentState) => {
+    currentState.status = 'failed';
+  }
+}
+
+const addNewTaskReducers = {
+  [addNewTask.pending]: (currentState) => {
+    currentState.status = 'loading';
+  },
+  [addNewTask.fulfilled]: (currentState, action) => {
+    currentState.status = 'success';
+    currentState.tasks.push(action.payload);
+  },
+  [addNewTask.rejected]: (currentState) => {
+    currentState.status = 'failed';
+  }
+}
+
+const toggleStatusReducers = {
+  [toggleStatus.pending]: (currentState) => {
+    currentState.status = 'loading';
+  },
+  [toggleStatus.fulfilled]: (currentState, action) => {
+    currentState.status = 'success';
+    const index = currentState.tasks.findIndex(task => task.id === action.payload.id);
+    currentState.tasks[index] = action.payload;
+  },
+  [toggleStatus.rejected]: (currentState) => {
+    currentState.status = 'failed';
+  }
+}
 
 const initialState = {
   tasks: [],
-  status: "error"
+  status: ""
 };
-fetchTasks.pending
+
 export const taskListSlice = createSlice({
   name: 'taskList',
   initialState,
-  reducers: {
-    add: (currentState, action) => {
-      currentState.push(
-      {
-        id: uuidv4(),
-        title: action.payload.title,
-        description: action.payload.description,
-        createdAt: getCreationDate(),
-        status: TASK_STATUS.OPEN
-      });
-    },
-    toggleStatus: (currentState, action) => {
-      const taskIndex = currentState.findIndex(task => task.id === action.payload.id);
-      currentState[taskIndex].status = currentState[taskIndex].status === TASK_STATUS.OPEN ? TASK_STATUS.CLOSED : TASK_STATUS.OPEN
-    }
+  extraReducers: {
+    ...fetchTasksReducers,
+    ...addNewTaskReducers,
+    ...toggleStatusReducers
   }
 })
 
-export const { add, toggleStatus } = taskListSlice.actions;
 export default taskListSlice.reducer;
