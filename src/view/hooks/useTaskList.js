@@ -1,19 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { add, toggleStatus } from '../../store/taskListSlice';
-import {showNotificationWithTimout} from "../../store/notificationSlice";
+import { addNewTask, fetchTasks, toggleStatus } from '../../services/taskListService';
+import { showNotificationWithTimeout } from "../../store/notificationSlice";
 
 export const useTaskList = () => {
   const taskList = useSelector(state => state.taskList)
-  
+
   const dispatch = useDispatch();
 
-  const addTask = (title, description) => {
-    dispatch(add({ title, description }));
-    dispatch(showNotificationWithTimout({type: "success", msg: "Task adicionada"}));
+  const fetchTaskList = () => {
+    dispatch(fetchTasks());
   }
+
+  const addTask = (title, description) => {
+    dispatch(addNewTask({ title, description }));
+    dispatch(showNotificationWithTimeout({ type: "success", msg: "Task adicionada" }));
+  }
+
   const toggleTaskStatus = (id) => {
     dispatch(toggleStatus({ id }));
-    dispatch(showNotificationWithTimout({type: "success", msg: "Task movida pra todo"}));
+    dispatch(showNotificationWithTimeout({ type: "success", msg: "Task movida" }));
   }
-  return { taskList, addTask, toggleTaskStatus };
+
+  return { taskList, toggleTaskStatus, fetchTaskList, addTask };
 }

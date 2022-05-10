@@ -6,11 +6,11 @@ const initialState = [];
 const addNotification = createAction('notification/add');
 const removeNotification = createAction('notification/remove');
 
-const showNotificationWithTimout = createAsyncThunk(
+const showNotificationWithTimeout = createAsyncThunk(
   'notification/show',
   async (action, thunkApi)=> {
     const id = uuidv4();
-    thunkApi.dispatch(addNotification({id, type: "success", msg: "Task adicionada"}));
+    thunkApi.dispatch(addNotification({id, type: action.type, msg: action.msg}));
     await new Promise(resolve => setTimeout(resolve, 5000));
     thunkApi.dispatch(removeNotification({id}))
   }
@@ -27,6 +27,6 @@ export const notificationReducer = createReducer(initialState, {
   },
 })
 
-export { showNotificationWithTimout }
+export { showNotificationWithTimeout }
 
 export default notificationReducer;

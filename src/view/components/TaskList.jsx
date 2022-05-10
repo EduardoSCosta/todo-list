@@ -1,15 +1,20 @@
-import { useState } from 'react';
-import { useTaskList } from '../hooks/useTaskList';
+import { useEffect, useState } from 'react';
 import { TASK_STATUS } from '../../constants/taskStatus';
-import Task from './Task';
+import { useTaskList } from '../hooks/useTaskList';
 import '../styles/components/_taskList.css';
+import Task from './Task';
 
 const TaskList = () => {
   const [currentListType, setCurrentListType] = useState(TASK_STATUS.OPEN);
 
-  const { taskList } = useTaskList();
+  const { taskList, fetchTaskList } = useTaskList();
 
-  const filteredList = taskList.filter(task => task.status === currentListType);
+  useEffect(() => {
+    fetchTaskList();
+  }, []);
+
+
+  const filteredList = taskList.tasks.filter(task => task.status === currentListType);
 
   return (
     <div className='task-list'>
