@@ -1,42 +1,48 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { addNewTask, fetchTasks, toggleStatus } from '../services/taskListService';
 
+export const fetchTasksThunk = createAsyncThunk('taskList/fetchTasks', () => fetchTasks());
+
+export const addNewTaskThunk = createAsyncThunk('taskList/addNewTask', (task) => addNewTask(task));
+
+export const toggleStatusThunk = createAsyncThunk('taskList/toggleTaskStatus', ({ id }) => toggleStatus({ id }));
+
 const fetchTasksReducers = {
-  [fetchTasks.pending]: (currentState) => {
+  [fetchTasksThunk.pending]: (currentState) => {
     currentState.status = 'loading';
   },
-  [fetchTasks.fulfilled]: (currentState, action) => {
+  [fetchTasksThunk.fulfilled]: (currentState, action) => {
     currentState.status = 'success';
     currentState.tasks = action.payload;
   },
-  [fetchTasks.rejected]: (currentState) => {
+  [fetchTasksThunk.rejected]: (currentState) => {
     currentState.status = 'failed';
   }
 }
 
 const addNewTaskReducers = {
-  [addNewTask.pending]: (currentState) => {
+  [addNewTaskThunk.pending]: (currentState) => {
     currentState.status = 'loading';
   },
-  [addNewTask.fulfilled]: (currentState, action) => {
+  [addNewTaskThunk.fulfilled]: (currentState, action) => {
     currentState.status = 'success';
     currentState.tasks.push(action.payload);
   },
-  [addNewTask.rejected]: (currentState) => {
+  [addNewTaskThunk.rejected]: (currentState) => {
     currentState.status = 'failed';
   }
 }
 
 const toggleStatusReducers = {
-  [toggleStatus.pending]: (currentState) => {
+  [toggleStatusThunk.pending]: (currentState) => {
     currentState.status = 'loading';
   },
-  [toggleStatus.fulfilled]: (currentState, action) => {
+  [toggleStatusThunk.fulfilled]: (currentState, action) => {
     currentState.status = 'success';
     const index = currentState.tasks.findIndex(task => task.id === action.payload.id);
     currentState.tasks[index] = action.payload;
   },
-  [toggleStatus.rejected]: (currentState) => {
+  [toggleStatusThunk.rejected]: (currentState) => {
     currentState.status = 'failed';
   }
 }
