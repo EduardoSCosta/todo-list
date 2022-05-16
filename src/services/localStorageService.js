@@ -11,14 +11,7 @@ const localStorageService = () => {
   const getAll = () => {
     const tasks = localStorage.getItem(TASK_LOCAL_KEY);
 
-    if (tasks === null) {
-      const emptyTasklist = JSON.stringify([]);
-      localStorage.setItem(TASK_LOCAL_KEY, emptyTasklist);
-
-      return JSON.parse(emptyTasklist);
-    } else {
-      return JSON.parse(tasks);
-    }
+    return tasks ? JSON.parse(tasks) : [];
   }
 
   const create = (task) => {
