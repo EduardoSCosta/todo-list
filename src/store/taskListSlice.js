@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addNewTask, fetchTasks, toggleStatus } from '../services/taskListService';
+import taskListService from '../services/httpService';
 
-export const fetchTasksThunk = createAsyncThunk('taskList/fetchTasks', () => fetchTasks());
+export const fetchTasksThunk = createAsyncThunk('taskList/fetchTasks', () => taskListService().getAll());
 
-export const addNewTaskThunk = createAsyncThunk('taskList/addNewTask', (task) => addNewTask(task));
+export const addNewTaskThunk = createAsyncThunk('taskList/addNewTask', (task) => taskListService().create(task));
 
-export const toggleStatusThunk = createAsyncThunk('taskList/toggleTaskStatus', ({ id }) => toggleStatus({ id }));
+export const toggleStatusThunk = createAsyncThunk('taskList/toggleTaskStatus',
+  ({ id, newStatus }) => taskListService().update({ id, newStatus })
+);
 
 const fetchTasksReducers = {
   [fetchTasksThunk.pending]: (currentState) => {
