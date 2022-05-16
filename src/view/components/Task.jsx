@@ -11,7 +11,7 @@ const Task = ({ task }) => {
       <div className='task__title-wrapper'>
         <input
           type='checkbox'
-          onChange={() => toggleTaskStatus(task.id)}
+          onChange={() => toggleTaskStatus(task.id, task.status)}
           checked={task.status === TASK_STATUS.CLOSED}
           className='task__checkbox'
         />

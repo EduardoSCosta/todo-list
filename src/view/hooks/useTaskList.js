@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import { createTask, switchTaskStatus } from '../../domain/Task';
 import { showNotificationWithTimeout } from '../../store/notificationSlice';
 import { addNewTaskThunk, fetchTasksThunk, toggleStatusThunk } from '../../store/taskListSlice';
-import { TASK_STATUS } from '../../constants/taskStatus';
-import { getCreationDate } from '../../utils/getCreationDate';
 
 export const useTaskList = () => {
   const taskList = useSelector(state => state.taskList)
@@ -15,20 +13,16 @@ export const useTaskList = () => {
   }
 
   const addTask = (title, description) => {
-    const task = {
-      id: uuidv4(),
-      title: title,
-      description: description,
-      createdAt: getCreationDate(),
-      status: TASK_STATUS.OPEN
-    }
+    const task = createTask({title, description})
 
     dispatch(addNewTaskThunk(task));
     dispatch(showNotificationWithTimeout({ type: "success", msg: "Task adicionada" }));
   }
 
-  const toggleTaskStatus = (id) => {
-    dispatch(toggleStatusThunk({ id }));
+  const toggleTaskStatus = (id, status) => {
+    const newStatus = switchTaskStatus({status});
+
+    dispatch(toggleStatusThunk({ id, newStatus }));
     dispatch(showNotificationWithTimeout({ type: "success", msg: "Task movida" }));
   }
 
