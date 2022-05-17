@@ -1,25 +1,11 @@
 {
   "taskList": [
     {
-      "id": "cf245caf-1657-4d2e-a0f1-1dcea342ecc9",
-      "title": "5342845856897896789",
-      "description": "67896796796789",
-      "createdAt": "Created May 9, 2022, 14:43",
-      "status": "Closed"
-    },
-    {
-      "id": "170347a8-fc15-4fa4-9bac-6bc3ee5a3061",
-      "title": "wertwert",
-      "description": "wertwertwertert",
-      "createdAt": "Created May 9, 2022, 17:15",
-      "status": "Closed"
-    },
-    {
-      "id": "2fe6e2f4-f696-4ceb-82d1-b67743c99aca",
-      "title": "235425442423265u635353g24g2g1",
-      "description": "g2g42g2g2g42gg24g24g24g22gg22gg2f11f2gf353",
-      "createdAt": "Created May 11, 2022, 12:14",
-      "status": "Closed"
+      "id": "aa3668db-52fb-4541-8f8c-55a47dd02db2",
+      "title": "Task 1 title",
+      "description": "Task 1 description.",
+      "createdAt": "Created May 17, 2022, 11:57",
+      "status": "Open"
     }
   ]
 }

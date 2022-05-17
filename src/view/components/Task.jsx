@@ -4,7 +4,7 @@ import '../styles/components/_task.css';
 
 const Task = ({ task }) => {
 
-  const { toggleTaskStatus } = useTaskList();
+  const { toggleTaskStatus, removeTask } = useTaskList();
 
   return (
     <div className='task'>
@@ -16,6 +16,7 @@ const Task = ({ task }) => {
           className='task__checkbox'
         />
         <h3 className='task__title'>{task.title}</h3>
+        <button className='task__delete-btn' onClick={() => removeTask(task.id)}>x</button>
       </div>
       <p className='task__description'>{task.description}</p>
       <p className='task__date'>{task.createdAt}</p>

@@ -27,7 +27,13 @@ const httpService = () => {
     return response.data;
   }
 
-  return { get, getAll, create, update };
+  const remove = async ({ id }) => {
+    await instance.delete(id);
+    
+    return id;
+  }
+
+  return { get, getAll, create, update, remove };
 }
 
 export default httpService;

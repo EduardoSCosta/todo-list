@@ -9,6 +9,8 @@ export const toggleStatusThunk = createAsyncThunk('taskList/toggleTaskStatus',
   ({ id, newStatus }) => taskListService().update({ id, newStatus })
 );
 
+export const removeTaskThunk = createAsyncThunk('taskList/removeTask', ({ id }) => taskListService().remove({ id }));
+
 const fetchTasksReducers = {
   [fetchTasksThunk.pending]: (currentState) => {
     currentState.status = 'loading';
@@ -49,6 +51,20 @@ const toggleStatusReducers = {
   }
 }
 
+const removeTaskReducers = {
+  [removeTaskThunk.pending]: (currentState) => {
+    currentState.status = 'loading';
+  },
+  [removeTaskThunk.fulfilled]: (currentState, action) => {
+    currentState.status = 'success';
+    const tasks = currentState.tasks.filter(task => task.id !== action.payload);
+    currentState.tasks = tasks;
+  },
+  [removeTaskThunk.rejected]: (currentState) => {
+    currentState.status = 'failed';
+  }
+}
+
 const initialState = {
   tasks: [],
   status: ""
@@ -60,7 +76,8 @@ export const taskListSlice = createSlice({
   extraReducers: {
     ...fetchTasksReducers,
     ...addNewTaskReducers,
-    ...toggleStatusReducers
+    ...toggleStatusReducers,
+    ...removeTaskReducers
   }
 })
 

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { createTask, switchTaskStatus } from '../../domain/Task';
 import { showNotificationWithTimeout } from '../../store/notificationSlice';
-import { addNewTaskThunk, fetchTasksThunk, toggleStatusThunk } from '../../store/taskListSlice';
+import { addNewTaskThunk, fetchTasksThunk, removeTaskThunk, toggleStatusThunk } from '../../store/taskListSlice';
 
 export const useTaskList = () => {
   const taskList = useSelector(state => state.taskList)
@@ -23,8 +23,13 @@ export const useTaskList = () => {
     const newStatus = switchTaskStatus({status});
 
     dispatch(toggleStatusThunk({ id, newStatus }));
-    dispatch(showNotificationWithTimeout({ type: "success", msg: "Task movida" }));
+    dispatch(showNotificationWithTimeout({ type: "changed", msg: "Task movida" }));
   }
 
-  return { taskList, toggleTaskStatus, fetchTaskList, addTask };
+  const removeTask = (id) => {
+    dispatch(removeTaskThunk({ id }));
+    dispatch(showNotificationWithTimeout({ type: "removed", msg: "Task excluída" }));
+  }
+
+  return { taskList, toggleTaskStatus, fetchTaskList, addTask, removeTask };
 }
