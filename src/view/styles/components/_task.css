@@ -17,6 +17,16 @@
 
 .task__title {
   margin-left: 10px;
+  width: 100%;
+}
+
+.task__delete-btn {
+  background-color: transparent;
+  color: #bd1212;
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
 
 .task__description {

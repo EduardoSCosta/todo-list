@@ -34,7 +34,15 @@ const localStorageService = () => {
     return updatedTask;
   }
 
-  return { get, getAll, create, update };
+  const remove = ({id}) => {
+    const tasks = getAll();
+    const newTaskList = tasks.filter(task => task.id !== id)
+    localStorage.setItem(TASK_LOCAL_KEY, JSON.stringify(newTaskList));
+
+    return id;
+  }
+
+  return { get, getAll, create, update, remove };
 }
 
 export default localStorageService;
